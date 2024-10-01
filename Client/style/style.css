@@ -1,0 +1,1453 @@
+@import url(font/stylesheets.css);
+@import url(template.css);
+@import url(icons/icon.css);
+
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'Roundo', Arial, sans-serif;
+    font-weight: 400;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    max-height: 100vh;
+    background: var(--background-ambiant);
+    color: rgb(255, 255, 255);
+
+}
+
+
+
+body * {
+    z-index: 1;
+}
+
+.test-view {
+    position: fixed;
+    z-index: 9999;
+    border: 1px solid rgba(255, 255, 255, .6);
+    background: #212121;
+    color: rgba(255, 255, 255, .6);
+    padding: 8px;
+    cursor: pointer;
+    width: 120px;
+    top: 24px;
+    left: calc(50% - 60px);
+}
+
+.test-view:hover {
+    border: 1px solid rgba(255, 255, 255, .9);
+    background: #393939;
+
+
+}
+
+.ambiant {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/Background.png);
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.ambiant svg {
+    width: 100%;
+    height: 100%;
+}
+
+header {
+    display: flex;
+    padding: 0 24px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+
+}
+
+header .logo-side {
+
+
+    font-family: 'Roundo Variable';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 32px;
+
+    leading-trim: both;
+    text-edge: cap;
+
+    color: #FFFFFF;
+
+
+}
+
+header .links-side {
+    list-style: none;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: space-between;
+    padding: 0;
+}
+
+header .links-side li {
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+
+    width: 48px;
+    height: 48px;
+
+    background: #ffffff13;
+    border-radius: 32px 32px 16px 16px;
+    cursor: pointer;
+}
+
+header .links-side li i {
+    cursor: pointer;
+}
+
+header .links-side li .indicator {}
+
+.control-panel {
+    position: absolute;
+    bottom: 16px;
+    left: 32px;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    z-index: 99;
+}
+
+.control-panel .left-control,
+.control-panel .right-control {
+    width: 116px;
+    height: 64px;
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.control-panel .left-control .btn {
+    position: relative;
+    width: 116px;
+    height: 64px;
+    background: #00FF85;
+    border-radius: 20px;
+    clip-path: polygon(0% 43.63%, 0% 43.63%, 0.202% 38.607%, 0.787% 33.814%, 1.728% 29.312%, 2.995% 25.16%, 4.559% 21.418%, 6.392% 18.147%, 8.464% 15.405%, 10.746% 13.252%, 13.21% 11.749%, 15.826% 10.954%, 81.343% 0.69%, 81.343% 0.69%, 84.307% 0.705%, 87.141% 1.644%, 89.804% 3.431%, 92.25% 5.992%, 94.439% 9.25%, 96.326% 13.13%, 97.869% 17.557%, 99.024% 22.456%, 99.749% 27.751%, 100% 33.367%, 100% 67.087%, 100% 67.087%, 99.749% 72.702%, 99.024% 77.997%, 97.869% 82.896%, 96.326% 87.323%, 94.439% 91.204%, 92.25% 94.462%, 89.804% 97.022%, 87.141% 98.809%, 84.307% 99.748%, 81.343% 99.763%, 15.826% 89.5%, 15.826% 89.5%, 13.21% 88.705%, 10.746% 87.201%, 8.464% 85.049%, 6.392% 82.307%, 4.559% 79.035%, 2.995% 75.293%, 1.728% 71.142%, 0.787% 66.64%, 0.202% 61.847%, 0% 56.823%, 0% 43.63%);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color: #222B3E;
+}
+
+.control-panel .right-control .btn {
+    position: relative;
+    width: 116px;
+    height: 64px;
+    background: #FF3F3F;
+    border-radius: 20px;
+    clip-path: polygon(100% 43.63%, 100% 43.63%, 99.798% 38.607%, 99.213% 33.814%, 98.272% 29.312%, 97.005% 25.16%, 95.441% 21.418%, 93.608% 18.147%, 91.536% 15.405%, 89.254% 13.252%, 86.79% 11.749%, 84.174% 10.954%, 18.657% 0.69%, 18.657% 0.69%, 15.693% 0.705%, 12.859% 1.644%, 10.197% 3.431%, 7.75% 5.992%, 5.561% 9.25%, 3.674% 13.13%, 2.131% 17.557%, 0.976% 22.456%, 0.251% 27.751%, 0% 33.367%, 0% 67.087%, 0% 67.087%, 0.251% 72.702%, 0.976% 77.997%, 2.131% 82.896%, 3.674% 87.323%, 5.561% 91.204%, 7.75% 94.462%, 10.197% 97.022%, 12.859% 98.809%, 15.693% 99.748%, 18.657% 99.763%, 84.174% 89.5%, 84.174% 89.5%, 86.79% 88.705%, 89.254% 87.201%, 91.536% 85.049%, 93.608% 82.307%, 95.441% 79.035%, 97.005% 75.293%, 98.272% 71.142%, 99.213% 66.64%, 99.798% 61.847%, 100% 56.823%, 100% 43.63%);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color: #FFF;
+}
+
+.control-panel .center-control {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.control-panel .center-control .btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+    width: 145px;
+    height: auto;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+}
+
+.btn {
+    cursor: pointer;
+    opacity: .8;
+}
+
+.btn:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.btn .emp {
+    position: absolute;
+    font-weight: 600;
+    font-size: 70%;
+    bottom: 10px;
+    opacity: 50%;
+}
+
+
+/* Live-comment */
+
+.live-comments {
+    position: fixed;
+    right: 32px;
+    bottom: 16px;
+    width: fit-content;
+    max-width: 300px;
+    height: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+}
+
+.live-comments .live-comments-header {}
+
+.live-comments .comment {
+    display: block;
+    flex-direction: row;
+    position: relative;
+    width: fit-content;
+}
+
+.live-comments .comment .user-avatar {
+    width: 56px;
+    height: 56px;
+    /* Ellipse 8 */
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    left: -24px;
+    top: -24px;
+    background: #d9d9d90b;
+    border-radius: 24px;
+}
+
+.live-comments .comment .user-comment {
+    /* Frame 31 */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px;
+    gap: 10px;
+    /* isolation: isolate; */
+    /* position: absolute; */
+    /* width: calc(100% - 48px); */
+    height: fit-content;
+    /* left: 19.77px; */
+    /* top: 55.94px; */
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    font-size: 14px;
+}
+
+.live-comments .comment .user-type {
+    position: absolute;
+    font-size: 72%;
+    right: 12px;
+    top: 12px;
+    opacity: .5;
+}
+
+.live-comments .comment.old {
+    transform: scale(0.8);
+    opacity: .5;
+}
+
+.live-comments .live-comments-header {
+    width: 82%;
+    text-align: center;
+    font-size: 72%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.live-comments .live-comments-header span {
+    opacity: .72;
+}
+
+.live-comments .live-comments-header div.toggle {
+    font-weight: 500;
+    opacity: .72;
+}
+
+.live-comments .live-comments-header div.toggle:hover {
+    opacity: .72;
+    cursor: pointer;
+}
+
+/* End Live-comment */
+
+/* Playground */
+
+.playground-side {
+    position: relative;
+    height: calc(100vh - 80px - 32px);
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-top: 64px;
+}
+
+.test .playground-side {
+    border: 1px solid rgba(255, 0, 0, 0.747);
+}
+
+.playground-side .indicator {
+    padding: 8px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.playground {
+    width: 100%;
+    height: 100%;
+    /* background : url('../img/Playground-default.png'); */
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    background-position: center;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.test .playground {
+    border: 1px solid rgba(0, 255, 128, 0.747);
+
+}
+
+.playground .table-space {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+
+}
+
+.playground .table-space svg.table {
+    height: 100%;
+    width: auto;
+    z-index: 3;
+    position: relative;
+
+}
+
+
+.playground .table-space svg.ombre {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+
+}
+
+
+.playground .table-space svg.marbre {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    z-index: 1;
+
+}
+
+
+
+.cr {
+    background-image: url(../img/Card/heart.svg);
+    background-position: 0% 0%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.cn {
+    background-image: url(../img/Card/pic.svg);
+    background-position: 0% 0%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.fc {
+    background-image: url(../img/Card/square.svg);
+    background-position: 0% 0%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.tr {
+    background-image: url(../img/Card/trefle.svg);
+    background-position: 0% 0%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.bottom {
+    position: absolute;
+    bottom: -40px;
+    width: 100%;
+    height: auto;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.test .bottom {
+    border: 1px solid rgba(255, 255, 0, 0.428);
+
+}
+
+.bottom .current-player {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.bottom .current-player .player-avatar {
+    /* image */
+    position: relative;
+    width: 88px;
+    height: 88px;
+    /* left: calc(50% - 96px/2); */
+    /* top: 0px; */
+    /* background: #212121; */
+    /* border: 4px solid rgba(255, 255, 255, 0.1); */
+    border-radius: 32px;
+    z-index: 1;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom .current-player .player-avatar .user-game-stats {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 12px 4px 4px;
+    background-color: rgba(255, 255, 255, 0.273);
+    width: fit-content;
+    border-radius: 32px;
+    position: absolute;
+    bottom: -32px;
+    z-index: 0;
+    font-size: 12px;
+}
+
+.bottom .current-player .player-avatar .user-profil-picture {
+    width: 88px;
+    height: 88px;
+    background: #212121;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 32px;
+    z-index: 1;
+}
+
+.bottom .current-player .player-avatar .user-game-stats div {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.bottom .current-player .player-data {
+    display: flex;
+    gap: 72px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 12px;
+    z-index: 0;
+}
+
+.bottom .current-player .player-data .right-user-data {
+    padding: 4px 4px 4px 12px;
+    background-color: rgba(255, 255, 255, 0.273);
+    border-radius: 16px;
+    width: 96px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: center;
+    line-height: 1;
+}
+
+.bottom .current-player .player-data .left-user-data {
+    display: flex;
+    text-align: center;
+    padding: 4px;
+    width: 96px;
+    background-color: rgba(255, 255, 255, 0.273);
+    /* clip-path: polygon( 0.427% 50.057%,0.427% 50.057%,0.617% 44.366%,1.167% 38.938%,2.05% 33.838%,3.24% 29.135%,4.708% 24.897%,6.429% 21.192%,8.374% 18.086%,10.517% 15.648%,12.83% 13.944%,15.286% 13.044%,81.075% 0.611%,81.075% 0.611%,84.014% 0.629%,86.824% 1.752%,89.463% 3.89%,91.889% 6.952%,94.059% 10.849%,95.93% 15.49%,97.46% 20.786%,98.605% 26.645%,99.324% 32.978%,99.573% 39.695%,99.573% 60.419%,99.573% 60.419%,99.324% 67.135%,98.605% 73.468%,97.46% 79.328%,95.93% 84.623%,94.059% 89.264%,91.889% 93.161%,89.463% 96.224%,86.824% 98.361%,84.014% 99.484%,81.075% 99.502%,15.286% 87.069%,15.286% 87.069%,12.83% 86.169%,10.517% 84.466%,8.374% 82.027%,6.429% 78.922%,4.708% 75.216%,3.24% 70.978%,2.05% 66.275%,1.167% 61.176%,0.617% 55.747%,0.427% 50.057%,0.427% 50.057% ); */
+    border-radius: 16px;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.bottom .current-player .card-side {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom .current-player .card-side .played-cards {
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.bottom .current-player .card-side .played-cards .waiting-card {
+
+    width: 54px;
+    height: 72px;
+
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px dashed rgba(255, 255, 255, 0.32);
+    border-radius: 12.6669px;
+
+
+}
+
+
+.bottom .current-player .card-side .hand-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.bottom .current-player .card-side .hand-card .card {
+    width: 56px;
+    height: 74px;
+    background: #FFFFFF;
+    box-shadow: 0px 5.11801px 8.77373px rgba(0, 0, 0, 0.15), inset 0px 0.988018px 21.0777px rgba(19, 37, 72, 0.3);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.bottom .current-player .card-side .hand-card .card .card-color {
+    height: 16px;
+    width: 16px;
+}
+
+.bottom .current-player .card-side .hand-card .card:nth-child(1) {
+    margin-top: 24px;
+}
+
+.bottom .current-player .card-side .hand-card .card:nth-child(2) {
+    margin-top: 12px;
+}
+
+.bottom .current-player .card-side .hand-card .card:nth-child(3) {
+    /* margin-top: 16px; */
+}
+
+.card-side .hand-card .card:nth-child(4) {
+    margin-top: 12px;
+}
+
+.bottom .current-player .card-side .hand-card .card:nth-child(5) {
+    margin-top: 24px;
+}
+
+
+.bottom .current-player .card-side .hand-card .card .card-number {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+    color: #000
+}
+
+
+/* Left Player */
+
+
+.left {
+    position: absolute;
+    left: -88px;
+    width: fit-content;
+    height: auto;
+    /* left: 0; */
+    display: block;
+    /* flex-direction: row; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* align-content: center; */
+}
+
+.test .left {
+    border: 1px solid rgba(255, 255, 0, 0.428);
+
+}
+
+.left .player {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-end;
+    align-items: flex-end;
+    line-height: 1;
+    justify-content: flex-start;
+    width: 50%;
+    gap: 16px;
+}
+
+.left .player .player-avatar {
+    /* image */
+    position: relative;
+    width: auto;
+    height: auto;
+    /* left: calc(50% - 96px/2); */
+    /* top: 0px; */
+    /* background: #212121; */
+    /* border: 4px solid rgba(255, 255, 255, 0.1); */
+    border-radius: 40px;
+    z-index: 1;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: nowrap;
+}
+
+.left .player .player-avatar .user-game-stats {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px 4px 4px;
+    /* background-color: rgba(255, 255, 255, 0.273); */
+    width: fit-content;
+    border-radius: 32px;
+    position: absolute;
+    bottom: -32px;
+    z-index: 0;
+    font-size: 12px;
+    background: #313131;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+}
+
+.left .player .player-avatar .user-profil-picture {
+    width: 72px !important;
+    height: 72px !important;
+    background: #212121;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    z-index: 1;
+}
+
+.left .player .player-avatar .user-game-stats div {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.left .player .player-data {
+    display: flex;
+    gap: 56px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 12px;
+    z-index: 0;
+}
+
+.left .player .right-user-data {
+    padding: 4px;
+    width: 64px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: flex-start;
+    line-height: 1;
+    background: #313131;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    /* position : absolute; */
+    /* right: -8px; */
+}
+
+.left .player .left-user-data {
+    padding: 4px;
+    width: 64px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: flex-start;
+    line-height: 1;
+    background: #313131;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    /* position : absolute; */
+    /* left: calc(-1* (8px - 64px)); */
+}
+
+
+.left .player .card-side {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+}
+
+.left .player .card-side .played-cards {
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.left .player .card-side .played-cards .waiting-card {
+
+    width: 54px;
+    height: 72px;
+
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px dashed rgba(255, 255, 255, 0.32);
+    border-radius: 12.6669px;
+
+
+}
+
+
+.left .player .card-side .hand-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.left .player .card-side .hand-card .card {
+    width: 56px;
+    height: 74px;
+    background: #FFFFFF;
+    box-shadow: 0px 5.11801px 8.77373px rgba(0, 0, 0, 0.15), inset 0px 0.988018px 21.0777px rgba(19, 37, 72, 0.3);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.left .player .card-side .hand-card .card .card-color {
+    height: 16px;
+    width: 16px;
+}
+
+.left .player .card-side .hand-card .card:nth-child(1) {
+    margin-top: 24px;
+}
+
+.left .player .card-side .hand-card .card:nth-child(2) {
+    margin-top: 12px;
+}
+
+.left .player .card-side .hand-card .card:nth-child(3) {
+    /* margin-top: 16px; */
+}
+
+.card-side .hand-card .card:nth-child(4) {
+    margin-top: 12px;
+}
+
+.left .player .card-side .hand-card .card:nth-child(5) {
+    margin-top: 24px;
+}
+
+
+.left .player .card-side .hand-card .card .card-number {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+    color: #000
+}
+
+.left .player .un-played-cards {
+    /* Group 21 */
+    position: absolute;
+    width: auto;
+    height: auto;
+    left: 0px;
+    top: -64px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 75px;
+}
+
+.left .player .un-played-cards .waiting-card {
+    width: 48px;
+    height: 64px;
+    background: transparent;
+    border-radius: 12px;
+    background-image: url(../img/Card/coveredcard.svg);
+    background-position: 0%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* Rectangle 10 */
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    margin-left: -32px;
+}
+
+.left .player .un-played-cards .waiting-card:nth-child(1){
+    margin-top: 16px;
+    transform: rotate(-20deg);
+}
+
+.left .player .un-played-cards .waiting-card:nth-child(2){
+    margin-top: 8px;
+    transform: rotate(-4deg);
+}
+
+.left .player .un-played-cards .waiting-card:nth-child(3){
+
+}
+
+.left .player .un-played-cards .waiting-card:nth-child(4){
+    margin-top: 8px;
+    transform: rotate(4deg);
+}
+
+.left .player .un-played-cards .waiting-card:nth-child(5){
+    margin-top: 16px;
+    transform: rotate(20deg);
+}
+
+/* Top Player */
+
+
+.top {
+    position: absolute;
+    top: 0px;
+    width: fit-content;
+    height: auto;
+    /* left: 0; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.test .top {
+    border: 1px solid rgba(255, 255, 0, 0.428);
+
+}
+
+.top .player {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: center;
+    line-height: 1;
+    justify-content: flex-start;
+    width: 50%;
+    gap: 16px;
+}
+
+.top .player .player-avatar {
+    /* image */
+    position: relative;
+    width: auto;
+    height: auto;
+    /* left: calc(50% - 96px/2); */
+    /* top: 0px; */
+    /* background: #212121; */
+    /* border: 4px solid rgba(255, 255, 255, 0.1); */
+    border-radius: 40px;
+    z-index: 1;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: nowrap;
+}
+
+.top .player .player-avatar .user-game-stats {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px 4px 4px;
+    /* background-color: rgba(255, 255, 255, 0.273); */
+    width: fit-content;
+    border-radius: 32px;
+    position: absolute;
+    top: -32px;
+    z-index: 0;
+    font-size: 12px;
+    background: #313131;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+}
+
+.top .player .player-avatar .user-profil-picture {
+    width: 72px !important;
+    height: 72px !important;
+    background: #212121;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    z-index: 1;
+}
+
+.top .player .player-avatar .user-game-stats div {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.top .player .player-data {
+    display: flex;
+    gap: 56px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 12px;
+    z-index: 0;
+}
+
+.top .player .left-user-data {
+    padding: 4px;
+    width: 64px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: flex-start;
+    line-height: 1;
+    background: #313131;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    /* position : absolute; */
+    /* right: -8px; */
+}
+
+.top .player .right-user-data {
+    padding: 4px;
+    width: 64px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: flex-start;
+    line-height: 1;
+    background: #313131;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    /* position : absolute; */
+    /* left: calc(-1* (8px - 64px)); */
+}
+
+
+.top .player .card-side {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 64px;
+}
+
+.top .player .card-side .played-cards {
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.top .player .card-side .played-cards .waiting-card {
+
+    width: 54px;
+    height: 72px;
+
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px dashed rgba(255, 255, 255, 0.32);
+    border-radius: 12.6669px;
+
+
+}
+
+
+.top .player .card-side .hand-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.top .player .card-side .hand-card .card {
+    width: 56px;
+    height: 74px;
+    background: #FFFFFF;
+    box-shadow: 0px 5.11801px 8.77373px rgba(0, 0, 0, 0.15), inset 0px 0.988018px 21.0777px rgba(19, 37, 72, 0.3);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.top .player .card-side .hand-card .card .card-color {
+    height: 16px;
+    width: 16px;
+}
+
+.top .player .card-side .hand-card .card:nth-child(1) {
+    margin-top: 24px;
+}
+
+.top .player .card-side .hand-card .card:nth-child(2) {
+    margin-top: 12px;
+}
+
+.top .player .card-side .hand-card .card:nth-child(3) {
+    /* margin-top: 16px; */
+}
+
+.card-side .hand-card .card:nth-child(4) {
+    margin-top: 12px;
+}
+
+.top .player .card-side .hand-card .card:nth-child(5) {
+    margin-top: 24px;
+}
+
+
+.top .player .card-side .hand-card .card .card-number {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+    color: #000
+}
+
+.top .player .un-played-cards {
+    /* Group 21 */
+    position: absolute;
+    width: auto;
+    height: auto;
+    left: 0px;
+    bottom: -64px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 75px;
+}
+
+.top .player .un-played-cards .waiting-card {
+    width: 48px;
+    height: 64px;
+    background: transparent;
+    border-radius: 12px;
+    background-image: url(../img/Card/coveredcard.svg);
+    background-position: 0%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* Rectangle 10 */
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    margin-left: -32px;
+}
+
+.top .player .un-played-cards .waiting-card:nth-child(1){
+    margin-top: -16px;
+    transform: rotate(20deg);
+}
+
+.top .player .un-played-cards .waiting-card:nth-child(2){
+    margin-top: -8px;
+    transform: rotate(4deg);
+}
+
+.top .player .un-played-cards .waiting-card:nth-child(3){
+
+}
+
+.top .player .un-played-cards .waiting-card:nth-child(4){
+    margin-top: -8px;
+    transform: rotate(-4deg);
+}
+
+.top .player .un-played-cards .waiting-card:nth-child(5){
+    margin-top: -16px;
+    transform: rotate(-20deg);
+}
+
+
+/* Right Player */
+
+
+.right {
+    position: absolute;
+    right: -88px;
+    width: fit-content;
+    height: auto;
+    /* left: 0; */
+    display: block;
+    /* flex-direction: row; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* align-content: center; */
+}
+
+.test .right {
+    border: 1px solid rgba(255, 255, 0, 0.428);
+
+}
+
+.right .player {
+    display: flex;
+    flex-direction: row;
+    align-content: flex-end;
+    align-items: flex-end;
+    line-height: 1;
+    justify-content: flex-start;
+    width: 50%;
+    gap: 16px;
+}
+
+.right .player .player-avatar {
+    /* image */
+    position: relative;
+    width: auto;
+    height: auto;
+    /* left: calc(50% - 96px/2); */
+    /* top: 0px; */
+    /* background: #212121; */
+    /* border: 4px solid rgba(255, 255, 255, 0.1); */
+    border-radius: 40px;
+    z-index: 1;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: nowrap;
+}
+
+.right .player .player-avatar .user-game-stats {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px 4px 4px;
+    /* background-color: rgba(255, 255, 255, 0.273); */
+    width: fit-content;
+    border-radius: 32px;
+    position: absolute;
+    bottom: -32px;
+    z-index: 0;
+    font-size: 12px;
+    background: #313131;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+}
+
+.right .player .player-avatar .user-profil-picture {
+    width: 72px !important;
+    height: 72px !important;
+    background: #212121;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    z-index: 1;
+}
+
+.right .player .player-avatar .user-game-stats div {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.right .player .player-data {
+    display: flex;
+    gap: 56px;
+    font-size: 12px;
+    position: absolute;
+    bottom: 12px;
+    z-index: 0;
+}
+
+.right .player .left-user-data {
+    padding: 4px;
+    width: 64px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: flex-start;
+    line-height: 1;
+    background: #313131;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    /* position : absolute; */
+    /* right: -8px; */
+}
+
+.right .player .right-user-data {
+    padding: 4px;
+    width: 64px;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: flex-start;
+    line-height: 1;
+    background: #313131;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    /* position : absolute; */
+    /* left: calc(-1* (8px - 64px)); */
+}
+
+
+.right .player .card-side {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+}
+
+.right .player .card-side .played-cards {
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+.right .player .card-side .played-cards .waiting-card {
+
+    width: 54px;
+    height: 72px;
+
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px dashed rgba(255, 255, 255, 0.32);
+    border-radius: 12.6669px;
+
+
+}
+
+
+.right .player .card-side .hand-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.right .player .card-side .hand-card .card {
+    width: 56px;
+    height: 74px;
+    background: #FFFFFF;
+    box-shadow: 0px 5.11801px 8.77373px rgba(0, 0, 0, 0.15), inset 0px 0.988018px 21.0777px rgba(19, 37, 72, 0.3);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.right .player .card-side .hand-card .card .card-color {
+    height: 16px;
+    width: 16px;
+}
+
+.right .player .card-side .hand-card .card:nth-child(1) {
+    margin-top: 24px;
+}
+
+.right .player .card-side .hand-card .card:nth-child(2) {
+    margin-top: 12px;
+}
+
+.right .player .card-side .hand-card .card:nth-child(3) {
+    /* margin-top: 16px; */
+}
+
+.card-side .hand-card .card:nth-child(4) {
+    margin-top: 12px;
+}
+
+.right .player .card-side .hand-card .card:nth-child(5) {
+    margin-top: 24px;
+}
+
+
+.right .player .card-side .hand-card .card .card-number {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+    color: #000
+}
+
+.right .player .un-played-cards {
+    /* Group 21 */
+    position: absolute;
+    width: auto;
+    height: auto;
+    left: 0px;
+    top: -64px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 75px;
+}
+
+.right .player .un-played-cards .waiting-card {
+    width: 48px;
+    height: 64px;
+    background: transparent;
+    border-radius: 12px;
+    background-image: url(../img/Card/coveredcard.svg);
+    background-position: 0%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* Rectangle 10 */
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    margin-left: -32px;
+}
+
+.right .player .un-played-cards .waiting-card:nth-child(1){
+    margin-top: 16px;
+    transform: rotate(-20deg);
+}
+
+.right .player .un-played-cards .waiting-card:nth-child(2){
+    margin-top: 8px;
+    transform: rotate(-4deg);
+}
+
+.right .player .un-played-cards .waiting-card:nth-child(3){
+
+}
+
+.right .player .un-played-cards .waiting-card:nth-child(4){
+    margin-top: 8px;
+    transform: rotate(4deg);
+}
+
+.right .player .un-played-cards .waiting-card:nth-child(5){
+    margin-top: 16px;
+    transform: rotate(20deg);
+}

@@ -23,7 +23,7 @@ body {
     max-height: 100vh;
     background: var(--background-ambiant);
     color: rgb(255, 255, 255);
-
+    user-select: none;
 }
 
 
@@ -433,6 +433,11 @@ header .links-side li .indicator {}
     background-position: 0% 0%;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+.fc~.card-number,
+.cr~.card-number {
+    color: #FF3F3F !important;
 }
 
 .tr {
@@ -889,26 +894,24 @@ header .links-side li .indicator {}
     margin-left: -32px;
 }
 
-.left .player .un-played-cards .waiting-card:nth-child(1){
+.left .player .un-played-cards .waiting-card:nth-child(1) {
     margin-top: 16px;
     transform: rotate(-20deg);
 }
 
-.left .player .un-played-cards .waiting-card:nth-child(2){
+.left .player .un-played-cards .waiting-card:nth-child(2) {
     margin-top: 8px;
     transform: rotate(-4deg);
 }
 
-.left .player .un-played-cards .waiting-card:nth-child(3){
+.left .player .un-played-cards .waiting-card:nth-child(3) {}
 
-}
-
-.left .player .un-played-cards .waiting-card:nth-child(4){
+.left .player .un-played-cards .waiting-card:nth-child(4) {
     margin-top: 8px;
     transform: rotate(4deg);
 }
 
-.left .player .un-played-cards .waiting-card:nth-child(5){
+.left .player .un-played-cards .waiting-card:nth-child(5) {
     margin-top: 16px;
     transform: rotate(20deg);
 }
@@ -1158,26 +1161,24 @@ header .links-side li .indicator {}
     margin-left: -32px;
 }
 
-.top .player .un-played-cards .waiting-card:nth-child(1){
+.top .player .un-played-cards .waiting-card:nth-child(1) {
     margin-top: -16px;
     transform: rotate(20deg);
 }
 
-.top .player .un-played-cards .waiting-card:nth-child(2){
+.top .player .un-played-cards .waiting-card:nth-child(2) {
     margin-top: -8px;
     transform: rotate(4deg);
 }
 
-.top .player .un-played-cards .waiting-card:nth-child(3){
+.top .player .un-played-cards .waiting-card:nth-child(3) {}
 
-}
-
-.top .player .un-played-cards .waiting-card:nth-child(4){
+.top .player .un-played-cards .waiting-card:nth-child(4) {
     margin-top: -8px;
     transform: rotate(-4deg);
 }
 
-.top .player .un-played-cards .waiting-card:nth-child(5){
+.top .player .un-played-cards .waiting-card:nth-child(5) {
     margin-top: -16px;
     transform: rotate(-20deg);
 }
@@ -1428,26 +1429,24 @@ header .links-side li .indicator {}
     margin-left: -32px;
 }
 
-.right .player .un-played-cards .waiting-card:nth-child(1){
+.right .player .un-played-cards .waiting-card:nth-child(1) {
     margin-top: 16px;
     transform: rotate(-20deg);
 }
 
-.right .player .un-played-cards .waiting-card:nth-child(2){
+.right .player .un-played-cards .waiting-card:nth-child(2) {
     margin-top: 8px;
     transform: rotate(-4deg);
 }
 
-.right .player .un-played-cards .waiting-card:nth-child(3){
+.right .player .un-played-cards .waiting-card:nth-child(3) {}
 
-}
-
-.right .player .un-played-cards .waiting-card:nth-child(4){
+.right .player .un-played-cards .waiting-card:nth-child(4) {
     margin-top: 8px;
     transform: rotate(4deg);
 }
 
-.right .player .un-played-cards .waiting-card:nth-child(5){
+.right .player .un-played-cards .waiting-card:nth-child(5) {
     margin-top: 16px;
     transform: rotate(20deg);
 }

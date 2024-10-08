@@ -1450,3 +1450,17 @@ header .links-side li .indicator {}
     margin-top: 16px;
     transform: rotate(20deg);
 }
+
+.disabled {
+    opacity: 0.5; /* Rendre la carte plus transparente */
+    pointer-events: none; /* Désactiver tous les événements de souris */
+}
+
+.disabled_not {
+    opacity: 0; /* Rendre la carte plus transparente */
+    pointer-events: none; /* Désactiver tous les événements de souris */
+}
+
+.marginTopZero{
+    margin-top: 0 !important;
+}

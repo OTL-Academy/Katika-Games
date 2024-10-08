@@ -121,7 +121,6 @@ function handlePlayerAction(action, playerId) {
         if (!currentCard1) {
             currentCard1 = action; // Le joueur actuel joue sa carte
             console.log(`${playerId} a joué la carte : ${currentCard1.symbole} ${currentCard1.numero}`);
-
             notifyCurrentPlayer(); // Passer au joueur suivant sans envoyer encore l'action
         } else if (!currentCard2) {
             currentCard2 = action; // Le deuxième joueur joue sa carte
@@ -130,18 +129,17 @@ function handlePlayerAction(action, playerId) {
             // Déterminer le gagnant du round
             const roundWinnerName = Round(currentCard1, currentCard2, clients[currentPlayerIndex].playerName);
             console.log(roundWinnerName);
-
             notifyRoundResult(roundWinnerName);
 
             // Réinitialiser pour le prochain tour
             currentCard1 = null;
             currentCard2 = null;
+
+            // Passer au joueur suivant
+            currentPlayerIndex = (currentPlayerIndex + 1) % clients.length;
+            notifyCurrentPlayer();
         }
     }
-
-    // Passer au joueur suivant
-    currentPlayerIndex = (currentPlayerIndex + 1) % clients.length;
-    notifyCurrentPlayer();
 }
 
 function notifyCurrentPlayer() {

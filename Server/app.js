@@ -1,9 +1,21 @@
+
+// Charger les variables d'environnement à partir du fichier .env
+require('dotenv').config();
+
+
+// Accéder à la variable d'environnement SERVER_URL
+const serverUrl = process.env.SERVER_URL;
+
+
 const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
 
 const app = express();
 const server = http.createServer(app);
+const port = process.env.PORT || 3000;
+
+
 const wss = new WebSocket.Server({ server });
 
 let clients = [];
@@ -221,6 +233,10 @@ function notifyRoundResult(winnerName) {
     });
 }
 
+app.get('/', (req, res) => {
+    res.send(`Serveur actif à l'adresse : ${serverUrl}`);
+});
+
 server.listen(3000, () => {
-    console.log('Serveur en cours d\'exécution sur http://localhost:3000');
+    console.log(`Application en cours d'exécution sur http://localhost:${port}`);
 });

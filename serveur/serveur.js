@@ -55,6 +55,7 @@ function Round(CartePlayer1, CartePlayer2, main) {
             return main === "Player 1" ? "Player 2" : "Player 1"; // L'autre joueur prend la main
         }
     }
+    console.log(main)
 }
 
 wss.on('connection', (ws) => {
@@ -62,7 +63,8 @@ wss.on('connection', (ws) => {
 
     if (clients.length < maxClients) {
         // Attribuer un ID de joueur
-        playerId = clients.length === 0 ? 'Player 1' : 'Player 2';
+        playerId = clients.length === 0 ? 0 : 1;
+
         clients.push(ws);
         console.log(`${playerId} est connecté. Total: ${clients.length}`);
 
@@ -82,7 +84,7 @@ wss.on('connection', (ws) => {
                 }));
             });
 
-            notifyCurrentPlayer(); // Notifier le joueur actuel
+            notifyCurrentPlayer(currentPlayerIndex); // Notifier le joueur actuel
         }
 
         ws.on('message', (message) => {
@@ -110,48 +112,102 @@ let currentCard2 = null; // Carte jouée par le joueur suivant
 function handlePlayerAction(action, playerId) {
     console.log(`${playerId} a joué : ${action.symbole} ${action.numero}`);
 
+    let nextPlayerId = switchPlayer(clients, playerId);
+
+    console.log("Le prochain joueur est", nextPlayerId + 1, " et ", playerId + 1, " a joué");
+
     // Diffuser l'action à tous les clients
     clients.forEach(client => {
         if (client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify({ action, playerId, card: action })); // Inclure l'objet carte dans l'action envoyée
+
+            client.send(JSON.stringify({ action, playerId, card: action, isCurrent: false })); // Inclure l'objet carte dans l'action envoyée
         }
     });
 
-    if (currentPlayerIndex === clients.findIndex(client => client.readyState === WebSocket.OPEN && playerId === client.playerId)) {
-        if (!currentCard1) {
-            currentCard1 = action; // Le joueur actuel joue sa carte
-            console.log(`${playerId} a joué la carte : ${currentCard1.symbole} ${currentCard1.numero}`);
-            notifyCurrentPlayer(); // Passer au joueur suivant sans envoyer encore l'action
-        } else if (!currentCard2) {
-            currentCard2 = action; // Le deuxième joueur joue sa carte
-            console.log(`${playerId} a joué la carte : ${currentCard2.symbole} ${currentCard2.numero}`);
+    clients[nextPlayerId].send(JSON.stringify({ playerId: nextPlayerId, isCurrent: true }));
 
-            // Déterminer le gagnant du round
-            const roundWinnerName = Round(currentCard1, currentCard2, clients[currentPlayerIndex].playerName);
-            console.log(roundWinnerName);
-            notifyRoundResult(roundWinnerName);
 
-            // Réinitialiser pour le prochain tour
-            currentCard1 = null;
-            currentCard2 = null;
+    // for (i = 0; i < clients.length; i++) {
+    //     let client = clients[i];
+    //     console.log("-----/", client);
+    //     if (client.readyState === WebSocket.OPEN) {
+    //         if (playerId != nextPlayerId) {
+    //             client.send(JSON.stringify({ action, playerId, card: action, isCurrent: true })); // Inclure l'objet carte dans l'action envoyée
+    //             console.log("En attente de la carte de ", nextPlayerId + 1);
+    //         } else {
+    //             client.send(JSON.stringify({ action, playerId, card: action, isCurrent: false })); // Inclure l'objet carte dans l'action envoyée
+    //         }
+    //     }
+    // }
 
-            // Passer au joueur suivant
-            currentPlayerIndex = (currentPlayerIndex + 1) % clients.length;
-            notifyCurrentPlayer();
-        }
-    }
+
+
+    // if (currentPlayerIndex === clients.findIndex(client => client.readyState === WebSocket.OPEN && playerId === client.playerId)) {
+    //     console.log(`c'est joyeur ${playerId} qui a la main`);
+
+    //     console.log(`${playerId} a joué la carte : ${currentCard1.symbole} ${currentCard1.numero}`);
+    //     getPlayerCard(rond, player);
+    //     if (!currentCard1) {
+    //         currentCard1 = action; // Le joueur actuel joue sa carte
+    //         console.log(`${playerId} a joué la carte : ${currentCard1.symbole} ${currentCard1.numero}`);
+    //         // currentPlayerIndex = (currentPlayerIndex + 1) % clients.length;
+    //         notifyCurrentPlayer(currentPlayerIndex); // Passer au joueur suivant sans envoyer encore l'action
+    //     } else if (!currentCard2) {
+    //         currentCard2 = action; // Le deuxième joueur joue sa carte
+    //         console.log(`${playerId} a joué la carte : ${currentCard2.symbole} ${currentCard2.numero}`);
+
+    //         // Déterminer le gagnant du round
+    //         const roundWinnerName = Round(currentCard1, currentCard2, clients[currentPlayerIndex].playerName);
+    //         console.log(roundWinnerName);
+    //         notifyRoundResult(roundWinnerName);
+
+    //         // Réinitialiser pour le prochain tour
+    //         currentCard1 = null;
+    //         currentCard2 = null;
+
+    //         // Passer au joueur suivant
+    //         currentPlayerIndex = (currentPlayerIndex + 1) % clients.length;
+    //         notifyCurrentPlayer(currentPlayerIndex);
+    //     }
+    // }
 }
 
-function notifyCurrentPlayer() {
-    const currentPlayer = clients[currentPlayerIndex];
+function switchPlayer(playerCount, PlayerId) {
+    // console.log("Il ya",playerCount," joueurs et c'est player ",PlayerId,"Qui a la main");
+    if (PlayerId == playerCount.length) {
+        console.log("-Il ya", playerCount.length, " joueurs et c'est player ", PlayerId + 1, "qui doit jouer");
+        playerCount = 0;
+    } else {
+        PlayerId++;
+        console.log("Il ya", playerCount.length, " joueurs et c'est player ", PlayerId + 1, "Qui doit jouer");
+    }
+
+    // playerCount.forEach(player => {
+    //     if (player.playerId != PlayerId) {
+    //         player.send(JSON.stringify({ playerId, isCurrent: true })); // Inclure l'objet carte dans l'action envoyée
+
+    //     } else {
+    //         player.send(JSON.stringify({ playerId, isCurrent: false })); // Inclure l'objet carte dans l'action envoyée
+
+    //     }
+    // })
+
+    return PlayerId;
+
+
+}
+function notifyCurrentPlayer(currentPlayerIndexVar) {
+    const currentPlayer = clients[currentPlayerIndexVar];
 
     clients.forEach(client => {
         client.send(JSON.stringify({
             type: 'turn',
-            currentPlayer: currentPlayerIndex === 0 ? 'Player 1' : 'Player 2',
+            currentPlayer: currentPlayerIndexVar === 0 ? 1 : 2,
             isCurrent: client === currentPlayer,
         }));
     });
+    console.log("Player", currentPlayerIndexVar + 1, " joue ...");
+
 }
 
 function notifyRoundResult(winnerName) {

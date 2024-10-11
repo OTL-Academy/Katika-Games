@@ -1,3 +1,5 @@
+// const { console } = require("inspector");
+
 const socket = new WebSocket("ws://localhost:3000");
 
 let playerId; // Variable pour stocker l'identifiant du joueur
@@ -16,7 +18,7 @@ socket.onmessage = function (event) {
             playerId = data.playerId; // Récupérer l'ID du joueur
             displayPlayerConnection(playerId); // Afficher que le joueur est connecté 
         } else if (data.type === 'start') {
-            displayHand(data.cards); // Afficher les cartes du joueur lorsqu'il commence à jouer 
+            displayHand(data.cards, data); // Afficher les cartes du joueur lorsqu'il commence à jouer 
         } else if (data.action) {
             // Vérifier si le joueur actuel est celui qui a joué
             if (data.playerId === playerId) {
@@ -36,7 +38,7 @@ socket.onmessage = function (event) {
     }
 };
 
-function displayHand(cards) {
+function displayHand(cards, data) {
     const cardNumber = document.querySelectorAll('.card-number');
     const cardColor = document.querySelectorAll('.card-color');
     const card = document.querySelectorAll('.card');
@@ -49,9 +51,11 @@ function displayHand(cards) {
         cardList.innerHTML = element.numero;
 
         card[index].onclick = function () {
-            alert(`Vous avez joué: ${element.symbole} ${element.numero}`);
+            // alert(`Vous avez joué: ${element.symbole} ${element.numero}`);
 
             socket.send(JSON.stringify({ action: element })); // Envoyer l'action au serveur avec la carte jouée 
+            playOrWait(false, data.currentPlayer); // Désactiver les boutons pour l'autre joueur 
+
 
             card[index].classList.add('disabled'); // Ajouter une classe pour griser la carte
             card[index].disabled = true; // Désactiver le bouton après avoir joué la carte 
@@ -98,22 +102,46 @@ function displayNotPlayerWaitingCard(card) {
 
 function handleTurn(data) {
     const turnInfoContainer = document.getElementById('turnInfo');
+    console.log(data);
 
     if (data.isCurrent) {
+        console.log(data.isCurrent);
+
         turnInfoContainer.textContent = `${data.currentPlayer}, c'est votre tour !`;
-        toggleButtons(true); // Activer les boutons uniquement pour le joueur courant 
+        // toggleButtons(true); 
+        playOrWait(true, data.currentPlayer);// Activer les boutons uniquement pour le joueur courant 
     } else {
-        turnInfoContainer.textContent = `${data.currentPlayer} joue...`;
-        toggleButtons(false); // Désactiver les boutons pour l'autre joueur 
+        // console.log(data.isCurrent);
+
+        turnInfoContainer.textContent = `${data.currentPlayer} est entrain de jouer `;
+        // toggleButtons(false);
+        playOrWait(false, playerId); // Désactiver les boutons pour l'autre joueur 
+        console.log(playerId);
+        
     }
 }
 
 function toggleButtons(isEnabled) {
-    const buttons = document.querySelectorAll('#buttonContainer button');
+    const cards = document.querySelectorAll('.card');
 
-    buttons.forEach(button => {
-        button.disabled = !isEnabled; // Activer ou désactiver les boutons selon le tour du joueur 
+    cards.forEach(card => {
+        // console.log(cards);
+        let zoneToDisable = document.querySelector(".reveled-card");
+
+        // cards[card].classList.add('disabled_not'); // Ajouter une classe pour griser la carte
+        // cards[card].disabled = !isEnabled; // Désactiver le bouton après avoir joué la carte 
     });
+}
+
+function playOrWait(isEnabled, player) {
+    let zoneToDisable = document.querySelector(".reveled-card");
+    if (isEnabled) {
+        console.log("C'est votre tour ", player);
+        zoneToDisable.classList.remove("stop");
+    } else {
+        console.log("C'est au tour de player", player);
+        zoneToDisable.classList.add("stop");
+    }
 }
 
 function displayPlayerConnection(playerName) {

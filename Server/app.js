@@ -1,8 +1,7 @@
-
 // Charger les variables d'environnement à partir du fichier .env
-require('dotenv').config();
-
-
+require('dotenv').config({
+    path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
+});
 // Accéder à la variable d'environnement SERVER_URL
 const serverUrl = process.env.SERVER_URL;
 
@@ -238,5 +237,5 @@ app.get('/', (req, res) => {
 });
 
 server.listen(3000, () => {
-    console.log(`Application en cours d'exécution sur http://localhost:${port}`);
+    console.log(`Application en cours d'exécution sur ${serverUrl}`);
 });

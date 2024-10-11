@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Information API — Js</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #222, #444);
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info-container">
+        <p>
+            <strong>Connection Type</strong> <span id="netType" class="highlight">???</span>
+        </p>
+        <p>
+            📡 <strong>Download Speed:</strong> <span id="downSpeed" class="highlight">???</span>Mbps
+        </p>
+        <p>
+            📡 <strong>Round-Trip Time:</strong> <span id="rttTime" class="highlight">???</span>ms
+        </p>
+
+    </div>
+
+    <script>
+        // step into the world of magic !
+        const netInfoAvailable = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+        const typeSpan = document.querySelector("#netType"),
+                speedSpan = document.querySelector("#downSpeed"),
+                rttSpan = document.querySelector("#rttTime");
+
+        // Injects data into the Dom like a mad scientist
+        const showNetworkData = (connection) =>{
+            typeSpan.innerText = connection.effectiveType || "Unknow Magic";
+            speedSpan.innerText = connection.downlink || "Mystery Mbps";
+            rttSpan.innerText = connection.rtt || "Unknown RTT";
+        };
+
+        // Start the magic show if API is supported
+        if(netInfoAvailable){
+            showNetworkData(netInfoAvailable);
+            // Hook in the mutation wizardry to detect changes
+            netInfoAvailable.addEventListener('change',()=>{
+                console.log("Network just shape-shifted");
+                showNetworkData(netInfoAvailable);
+
+            });
+        } else {
+            document.body.innerHTML = '<h1>Network Information API is not supported in this magical realm.</h1>'
+        }
+    </script>
+</body>
+
+</html>

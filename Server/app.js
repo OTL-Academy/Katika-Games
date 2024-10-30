@@ -77,7 +77,7 @@ wss.on('connection', (ws) => {
         playerId = clients.length === 0 ? 0 : 1;
 
         clients.push(ws);
-        console.log(`${playerId} est connecté. Total: ${clients.length}`);
+        console.log(`${playerId + 1} est connecté. Total: ${clients.length}`);
 
         // Envoyer un message au joueur qui vient de se connecter
         ws.send(JSON.stringify({ type: 'connected', playerId }));
@@ -125,7 +125,8 @@ function handlePlayerAction(action, playerId) {
 
     let nextPlayerId = switchPlayer(clients, playerId);
 
-    console.log("Le prochain joueur est", nextPlayerId + 1, " et ", playerId + 1, " a joué");
+    // console.log("Le prochain joueur est", nextPlayerId + 1, " et ", playerId + 1, " a joué");
+    console.log(clients.length, "next player : ", nextPlayerId);
 
     // Diffuser l'action à tous les clients
     clients.forEach(client => {
@@ -135,7 +136,7 @@ function handlePlayerAction(action, playerId) {
         }
     });
 
-    clients[nextPlayerId].send(JSON.stringify({ playerId: nextPlayerId, isCurrent: true }));
+    clients[nextPlayerId].send(JSON.stringify({ type: 'turn', playerId: nextPlayerId, isCurrent: true })); // Envoyer au prochain joueur la main
 
 
     // for (i = 0; i < clients.length; i++) {
